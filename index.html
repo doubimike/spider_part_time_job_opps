@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>码市最新项目订阅</title>
+    <!-- Bootstrap -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css" media="screen">
+    .center-block {
+        width: 80%;
+        margin-top: 100px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    body {
+        background-color: #F7FAFC;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid center-block">
+        <h1>码市最新项目订阅</h1>
+        <div>
+            <p>每天中午12点自动收到码市最新的外包项目详情。</p>
+            <p>初衷：不是为了去外包兼职，而是说从这些外包的项目中收获灵感。</p>
+            <h3>我信奉技术的价值在于实现产品，希望能够从更多的现实需求中，得到灵感，做出产品，实现价值。</h3>
+        </div>
+        <form>
+            <div class="form-group">
+                <label for="email">输入订阅邮箱: </label>
+                <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+            </div>
+            <button type="submit" class="btn btn-default" id="submit">订阅</button>
+        </form>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+    $('#submit').click(function(event) {
+        event.preventDefault()
+        var email = $('#email').val()
+        console.log('email', email)
+        if (!email) {
+            return alert('邮箱必填')
+        }
+
+        $.ajax({
+                url: '/subscribe',
+                type: 'POST',
+                data: {
+                    email: email
+                },
+            })
+            .done(function(res) {
+                if (res.code === 0) {
+                    alert('订阅成功')
+                } else {
+                    alert('订阅失败，请重试')
+                }
+
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                console.log("complete");
+            });
+
+    });
+    </script>
+</body>
+
+</html>

@@ -9,8 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.5.0",
+    "body-parser": "^1.17.2",
     "cheerio": "^1.0.0-rc.2",
+    "cron": "^1.2.1",
     "express": "^4.15.3",
+    "mongoose": "^4.11.5",
+    "node-schedule": "^1.2.3",
+    "nodemailer": "^4.0.1",
     "superagent": "^3.5.2"
   }
 }
